@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: User
+Build-Jdk: 11.0.11
+Implementation-Title: sprint4
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.compassouol
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/sprint4
+Created-By: Maven Integration for Eclipse
+
