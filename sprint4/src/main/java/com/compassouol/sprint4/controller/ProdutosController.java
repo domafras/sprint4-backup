@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -40,6 +42,7 @@ public class ProdutosController {
 	// Cadastrar produtos
 	@PostMapping("")
 	@Transactional
+	@CacheEvict(value = "listaDeProdutos", allEntries = true)
 	public ResponseEntity<ProdutoDto> cadastrar(@RequestBody @Valid ProdutoForm form, UriComponentsBuilder uriBuilder) {
 
 		Produto produto = form.converter(produtoRepository);
@@ -50,8 +53,9 @@ public class ProdutosController {
 		return ResponseEntity.created(uri).body(new ProdutoDto(produto));
 	}
 
-	// Listar produtos cadastradas
+	// Listar produtos cadastrados
 	@GetMapping(value = "")
+	@Cacheable(value = "listaDeProdutos")
 	public List<ProdutoDto> listar(ProdutoForm produtoForm,
 			@PageableDefault(direction = Direction.ASC, page = 0, size = 20) Pageable pageable) {
 		Collection<Produto> produtos = (Collection<Produto>) produtoRepository.findAll(produtoForm.toSpec(), pageable)
@@ -72,7 +76,9 @@ public class ProdutosController {
 	// Atualizar produto por id
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<ProdutoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoProdutoForm form) {
+	@CacheEvict(value = "listaDeProdutos", allEntries = true)
+	public ResponseEntity<ProdutoDto> atualizar(@PathVariable Long id,
+			@RequestBody @Valid AtualizacaoProdutoForm form) {
 		Optional<Produto> optional = produtoRepository.findById(id);
 		if (optional.isPresent()) {
 			Produto produto = form.atualizar(id, produtoRepository);
@@ -80,18 +86,19 @@ public class ProdutosController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
+
 	// Excluir produto por id
-		@DeleteMapping("/{id}")
-		@Transactional
-		public ResponseEntity<?> remover(@PathVariable Long id) {
-			Optional<Produto> optional = produtoRepository.findById(id);
+	@DeleteMapping("/{id}")
+	@Transactional
+	@CacheEvict(value = "listaDeProdutos", allEntries = true)
+	public ResponseEntity<?> remover(@PathVariable Long id) {
+		Optional<Produto> optional = produtoRepository.findById(id);
 
-			if (optional.isPresent()) {
-				produtoRepository.deleteById(id);
-				return ResponseEntity.ok().build();
-			}
-
-			return ResponseEntity.notFound().build();
+		if (optional.isPresent()) {
+			produtoRepository.deleteById(id);
+			return ResponseEntity.ok().build();
 		}
+
+		return ResponseEntity.notFound().build();
+	}
 }

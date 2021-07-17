@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +42,7 @@ public class PedidosController {
 	// Cadastrar pedidos
 	@PostMapping("")
 	@Transactional
+	@CacheEvict(value = "listaDePedidos", allEntries = true)
 	public ResponseEntity<PedidoDto> cadastrar(@RequestBody @Valid PedidoForm form, UriComponentsBuilder uriBuilder) {
 
 		Pedido pedido = form.converter(produtoRepository);
@@ -52,6 +55,7 @@ public class PedidosController {
 
 	// Listar pedidos cadastrados
 	@GetMapping(value = "")
+	@Cacheable(value = "listaDePedidos")
 	public List<PedidoDto> listar() {
 		List<Pedido> pedidos = pedidoRepository.findAll();
 
@@ -71,6 +75,7 @@ public class PedidosController {
 	// Atualizar pedido por id
 	@PutMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = "listaDePedidos", allEntries = true)
 	public ResponseEntity<PedidoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoPedidoForm form) {
 		Optional<Pedido> optional = pedidoRepository.findById(id);
 		if (optional.isPresent()) {
@@ -83,6 +88,7 @@ public class PedidosController {
 	// Excluir pedido por id
 	@DeleteMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = "listaDePedidos", allEntries = true)
 	public ResponseEntity<?> remover(@PathVariable Long id) {
 		Optional<Pedido> optional = pedidoRepository.findById(id);
 		if (optional.isPresent()) {

@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -40,6 +42,7 @@ public class PessoasController {
 	// Cadastrar pessoa
 	@PostMapping("")
 	@Transactional
+	@CacheEvict(value = "listaDePessoas", allEntries = true)
 	public ResponseEntity<PessoaDto> cadastrar(@RequestBody @Valid PessoaForm form, UriComponentsBuilder uriBuilder) {
 
 		Pessoa pessoa = form.converter(pessoaRepository);
@@ -55,6 +58,7 @@ public class PessoasController {
 
 	// Listar pessoas cadastradas
 	@GetMapping(value = "")
+	@Cacheable(value = "listaDePessoas")
 	public List<PessoaDto> listar(PessoaForm pessoaForm,
 			@PageableDefault(direction = Direction.ASC, page = 0, size = 20) Pageable pageable) {
 		Collection<Pessoa> pessoas = (Collection<Pessoa>) pessoaRepository.findAll(pessoaForm.toSpec(), pageable)
@@ -75,6 +79,7 @@ public class PessoasController {
 	// Atualizar pessoa por id
 	@PutMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = "listaDePessoas", allEntries = true)
 	public ResponseEntity<PessoaDto> atualizar(@PathVariable("id") Long id,
 			@RequestBody @Valid AtualizacaoPessoaForm form) {
 
@@ -90,6 +95,7 @@ public class PessoasController {
 	// Excluir pessoa por id
 	@DeleteMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = "listaDePessoas", allEntries = true)
 	public ResponseEntity<?> remover(@PathVariable Long id) {
 		Optional<Pessoa> optional = pessoaRepository.findById(id);
 

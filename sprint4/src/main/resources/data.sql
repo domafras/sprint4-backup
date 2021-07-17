@@ -1,3 +1,6 @@
+INSERT INTO USUARIO(nome, email, senha) VALUES('Auth', 'auth@email.com', '$2a$10$fSHmDZotSqyFT8Cw7lpHU.9Y6m.sZKM7/JQSuaawBqP3KqaruulSm')
+
+
 INSERT INTO PESSOA(nome, cpf, salario, sexo) VALUES('Fulaninho de Tal', '01898745028', '1500.00', 'M')
 INSERT INTO PESSOA(nome, cpf, salario, sexo) VALUES('Beltrão', '22222222222', '2200.00', 'M')
 INSERT INTO PESSOA(nome, cpf, salario, sexo) VALUES('Casimiro', '33333333333', '3300.00', 'M')

@@ -10,9 +10,11 @@ public class GuideController {
 	@RequestMapping("/")
 	@ResponseBody
 	public String guide() {
-		return "Endpoints: " 
+		return "Endpoints: "
+				+ "/auth"
+				+ "/actuator"
 				+ "/pessoa "
-				+ "/produto "
-				+ "/pedido";
+				+ "/protected/produto "
+				+ "/protected/pedido";
 	}
 }
