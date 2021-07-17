@@ -3,7 +3,6 @@ package com.compassouol.sprint4.controller.form;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
@@ -78,18 +77,4 @@ public class ProdutoForm {
 		};
 	}
 
-	public Produto atualizar(Long id, ProdutoRepository produtoRepository) {
-		Optional<Produto> produto = produtoRepository.findById(id);
-
-		if (produto.isPresent()) {
-			Produto produtos = produto.get();
-
-			produtos.setDescricao(this.descricao);
-			produtos.setPrecoUnitario(this.precoUnitario);
-
-			return produtos;
-		}
-
-		return null;
-	}
 }

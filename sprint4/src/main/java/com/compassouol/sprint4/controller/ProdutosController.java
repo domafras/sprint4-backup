@@ -23,9 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.compassouol.sprint4.controller.dto.DetalhesDoProdutoDto;
 import com.compassouol.sprint4.controller.dto.ProdutoDto;
+import com.compassouol.sprint4.controller.dto.detalhes.DetalhesDoProdutoDto;
 import com.compassouol.sprint4.controller.form.ProdutoForm;
+import com.compassouol.sprint4.controller.form.atualizacao.AtualizacaoProdutoForm;
 import com.compassouol.sprint4.model.Produto;
 import com.compassouol.sprint4.repository.ProdutoRepository;
 
@@ -71,7 +72,7 @@ public class ProdutosController {
 	// Atualizar produto por id
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<ProdutoDto> atualizar(@PathVariable Long id, @RequestBody @Valid ProdutoForm form) {
+	public ResponseEntity<ProdutoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoProdutoForm form) {
 		Optional<Produto> optional = produtoRepository.findById(id);
 		if (optional.isPresent()) {
 			Produto produto = form.atualizar(id, produtoRepository);

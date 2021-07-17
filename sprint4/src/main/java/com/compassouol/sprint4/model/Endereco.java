@@ -2,37 +2,47 @@ package com.compassouol.sprint4.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Endereco {
 
-	@NotBlank
-	private String pais;
-	
-	@NotBlank
-	private String estado;
-	
-	@NotBlank
-	private String cidade;
-	
-	@Id @NotBlank
+	@Id @NotNull @NotEmpty
 	private String cep;
 	
-	@NotBlank
+	@NotNull @NotEmpty
+	private String pais;
+	
+	@NotNull @NotEmpty
+	private String estado;
+	
+	@NotNull @NotEmpty
+	private String cidade;
+	
+	@NotNull @NotEmpty
 	private String rua;
 	
 	@SuppressWarnings("unused")
 	private Endereco(){}
 	
-	public Endereco(String pais, String estado, String cidade, String cep, String rua) {
+	public Endereco(String cep, String pais, String estado, String cidade, String rua) {
+		this.cep = cep;
 		this.pais = pais;
 		this.estado = estado;
 		this.cidade = cidade;
-		this.cep = cep;
 		this.rua = rua;
 	}
 
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	
 	public String getPais() {
 		return pais;
 	}
@@ -55,14 +65,6 @@ public class Endereco {
 
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
 	}
 
 	public String getRua() {

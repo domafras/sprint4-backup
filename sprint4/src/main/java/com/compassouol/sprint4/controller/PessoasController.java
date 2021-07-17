@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.compassouol.sprint4.controller.dto.DetalhesDaPessoaDto;
 import com.compassouol.sprint4.controller.dto.PessoaDto;
-import com.compassouol.sprint4.controller.form.AtualizacaoPessoaForm;
+import com.compassouol.sprint4.controller.dto.detalhes.DetalhesDaPessoaDto;
 import com.compassouol.sprint4.controller.form.PessoaForm;
+import com.compassouol.sprint4.controller.form.atualizacao.AtualizacaoPessoaForm;
 import com.compassouol.sprint4.model.Pessoa;
 import com.compassouol.sprint4.repository.PessoaRepository;
 

@@ -11,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+//import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.compassouol.sprint4.model.Endereco;
@@ -28,6 +29,7 @@ public class PessoaForm {
 	@NotNull
 	@NotEmpty
 	@Length(min = 11, max = 11)
+	//@CPF
 	private String cpf;
 
 	@NotNull
