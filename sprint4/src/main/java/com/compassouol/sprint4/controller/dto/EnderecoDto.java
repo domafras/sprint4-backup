@@ -6,7 +6,7 @@ public class EnderecoDto {
 
 	private String cidade;
 	private String rua;
-	
+
 	public EnderecoDto(Endereco enderecos) {
 		this.cidade = enderecos.getCidade();
 		this.rua = enderecos.getRua();
@@ -19,5 +19,5 @@ public class EnderecoDto {
 	public String getRua() {
 		return rua;
 	}
-	
+
 }

@@ -15,26 +15,28 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Pessoa {
 
-	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
 	private String nome;
-	
+
 	@NotNull
 	private String cpf;
-	
+
 	@NotNull
 	private BigDecimal salario;
-	
+
 	@NotNull
 	private String sexo;
-	
-	@OneToMany(cascade=CascadeType.ALL)
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
-	
-	public Pessoa() {}
-	
+
+	public Pessoa() {
+	}
+
 	public Pessoa(@NotNull String nome, @NotNull String cpf, @NotNull BigDecimal salario, @NotNull String sexo,
 			List<Endereco> enderecos) {
 		this.nome = nome;
@@ -42,7 +44,7 @@ public class Pessoa {
 		this.salario = salario;
 		this.sexo = sexo;
 		this.enderecos = enderecos;
-	} 
+	}
 
 	public Long getId() {
 		return id;
@@ -51,11 +53,11 @@ public class Pessoa {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -91,5 +93,5 @@ public class Pessoa {
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
-		
+
 }

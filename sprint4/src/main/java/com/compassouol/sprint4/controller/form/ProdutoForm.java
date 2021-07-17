@@ -23,7 +23,7 @@ public class ProdutoForm {
 	@NotNull
 	private BigDecimal precoUnitario;
 
-	private Boolean status;
+	private Boolean ativo;
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
@@ -41,16 +41,16 @@ public class ProdutoForm {
 		this.precoUnitario = precoUnitario;
 	}
 
-	public Boolean getStatus() {
-		return status;
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Produto converter(ProdutoRepository produtoRepository) {
-		return new Produto(this.descricao, this.precoUnitario, this.status);
+		return new Produto(this.descricao, this.precoUnitario, this.ativo);
 
 	}
 
@@ -68,10 +68,10 @@ public class ProdutoForm {
 				Predicate predicadoPrecoUnitario = builder.like(campoPrecoUnitario, "%" + precoUnitario + "%");
 				predicados.add(predicadoPrecoUnitario);
 			}
-			if (status != null) {
-				Path<String> campoStatus = root.<String>get("status");
-				Predicate predicadoStatus = builder.like(campoStatus, "%" + status + "%");
-				predicados.add(predicadoStatus);
+			if (ativo != null) {
+				Path<Boolean> campoAtivo = root.<Boolean>get("ativo");
+				Predicate predicadoAtivo = builder.equal(campoAtivo, "%" + ativo + "%");
+				predicados.add(predicadoAtivo);
 			}
 			return builder.and(predicados.toArray(new Predicate[0]));
 		};

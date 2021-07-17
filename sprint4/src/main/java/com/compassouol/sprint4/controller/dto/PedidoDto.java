@@ -16,13 +16,13 @@ public class PedidoDto {
 	private BigDecimal total = new BigDecimal("0.00");
 	private String data;
 	private List<ProdutoDto> produtoDto = new ArrayList<>();
-	
+
 	public PedidoDto(Pedido pedido) {
 		this.data = pedido.getData();
 		this.total = pedido.getTotal();
 		this.setProdutoDto(pedido);
 	}
-	
+
 	public BigDecimal getTotal() {
 		return total;
 	}
@@ -40,11 +40,11 @@ public class PedidoDto {
 			this.produtoDto.add(new ProdutoDto(produto));
 		}
 	}
-	
+
 	public static List<PedidoDto> converter(Collection<Pedido> pedidos) {
 		return pedidos.stream().map(PedidoDto::new).collect(Collectors.toList());
 	}
-	
+
 	public static Page<PedidoDto> converter(Page<Pedido> pedidos) {
 		return pedidos.map(PedidoDto::new);
 	}

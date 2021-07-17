@@ -19,7 +19,7 @@ public class AtualizacaoProdutoForm {
 	private BigDecimal precoUnitario;
 
 	@NotNull
-	private Boolean status;
+	private Boolean ativo;
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
@@ -38,11 +38,11 @@ public class AtualizacaoProdutoForm {
 	}
 
 	public Boolean getStatus() {
-		return status;
+		return ativo;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Produto atualizar(Long id, ProdutoRepository produtoRepository) {
@@ -53,7 +53,7 @@ public class AtualizacaoProdutoForm {
 
 			produtos.setDescricao(this.descricao);
 			produtos.setPrecoUnitario(this.precoUnitario);
-			produtos.setStatus(this.status);
+			produtos.setAtivo(this.ativo);
 
 			return produtos;
 		}

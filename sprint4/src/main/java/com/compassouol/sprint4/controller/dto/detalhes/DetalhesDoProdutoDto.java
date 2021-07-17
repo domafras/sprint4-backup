@@ -9,13 +9,13 @@ public class DetalhesDoProdutoDto {
 	private Long id;
 	private String descricao;
 	private BigDecimal precoUnitario;
-	private Boolean status;
-	
+	private Boolean ativo;
+
 	public DetalhesDoProdutoDto(Produto produto) {
 		this.id = produto.getId();
 		this.descricao = produto.getDescricao();
 		this.precoUnitario = produto.getPrecoUnitario();
-		this.status = produto.getStatus();
+		this.ativo = produto.getAtivo();
 	}
 
 	public Long getId() {
@@ -30,8 +30,8 @@ public class DetalhesDoProdutoDto {
 		return precoUnitario;
 	}
 
-	public Boolean getStatus() {
-		return status;
+	public Boolean getAtivo() {
+		return ativo;
 	}
-	
+
 }

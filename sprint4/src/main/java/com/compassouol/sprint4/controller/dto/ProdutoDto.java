@@ -12,13 +12,13 @@ public class ProdutoDto {
 	private Long id;
 	private String descricao;
 	private BigDecimal precoUnitario;
-	private Boolean status;
+	private Boolean ativo;
 
 	public ProdutoDto(Produto produto) {
 		this.id = produto.getId();
 		this.descricao = produto.getDescricao();
 		this.precoUnitario = produto.getPrecoUnitario();
-		this.status = produto.getStatus();
+		this.ativo = produto.getAtivo();
 	}
 
 	public Long getId() {
@@ -32,13 +32,13 @@ public class ProdutoDto {
 	public BigDecimal getPrecoUnitario() {
 		return precoUnitario;
 	}
-	
-	public Boolean getStatus() {
-		return status;
+
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
 	public static List<ProdutoDto> converter(Collection<Produto> produtos) {
 		return produtos.stream().map(ProdutoDto::new).collect(Collectors.toList());
 	}
-	
+
 }

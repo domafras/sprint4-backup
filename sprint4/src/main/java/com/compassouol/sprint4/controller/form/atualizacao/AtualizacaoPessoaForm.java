@@ -8,6 +8,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.compassouol.sprint4.model.Endereco;
 import com.compassouol.sprint4.model.Pessoa;
 import com.compassouol.sprint4.repository.PessoaRepository;
@@ -22,8 +24,34 @@ public class AtualizacaoPessoaForm {
 	@NotEmpty
 	private List<Endereco> enderecos = new ArrayList<>();
 
+	@NotNull
+	@NotEmpty
+	@Length(min = 2, max = 30)
+	private String nome;
+
+	@NotNull
+	@NotEmpty
+	@Length(min = 1, max = 1)
+	private String sexo;
+
 	public BigDecimal getSalario() {
 		return salario;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	public void setSalario(BigDecimal salario) {
@@ -39,12 +67,15 @@ public class AtualizacaoPessoaForm {
 	}
 
 	public Pessoa atualizar(Long id, PessoaRepository pessoaRepository) {
-		
+
 		Pessoa pessoa = pessoaRepository.getOne(id);
 
 		pessoa.setSalario(this.salario);
 		pessoa.setEnderecos(this.enderecos);
+		pessoa.setNome(this.nome);
+		pessoa.setSexo(this.sexo);
 
 		return pessoa;
 	}
+
 }

@@ -41,14 +41,15 @@ public class PessoasController {
 	@PostMapping("")
 	@Transactional
 	public ResponseEntity<PessoaDto> cadastrar(@RequestBody @Valid PessoaForm form, UriComponentsBuilder uriBuilder) {
+
 		Pessoa pessoa = form.converter(pessoaRepository);
 		if (pessoa != null) {
 			pessoaRepository.save(pessoa);
 			URI uri = uriBuilder.path("/pessoa/{id}").buildAndExpand(pessoa.getId()).toUri();
 			return ResponseEntity.created(uri).body(new PessoaDto(pessoa));
 		} else {
-			System.out.println("CPF já cadastrado, este valor deve ser único.");
-			return null;
+			System.out.println("CPF já cadastrado, este valor e o CEP devem ser únicos.");
+			return ResponseEntity.badRequest().build();
 		}
 	}
 
@@ -74,12 +75,15 @@ public class PessoasController {
 	// Atualizar pessoa por id
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<PessoaDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoPessoaForm form) {
-		Optional<Pessoa> optional = pessoaRepository.findById(id);
-		if (optional.isPresent()) {
-			Pessoa pessoa = form.atualizar(id, pessoaRepository);
+	public ResponseEntity<PessoaDto> atualizar(@PathVariable("id") Long id,
+			@RequestBody @Valid AtualizacaoPessoaForm form) {
+
+		Pessoa pessoa = form.atualizar(id, pessoaRepository);
+
+		if (pessoa != null) {
 			return ResponseEntity.ok(new PessoaDto(pessoa));
 		}
+
 		return ResponseEntity.notFound().build();
 	}
 

@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-@SQLDelete(sql = "UPDATE Pedido SET ativo = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE Pedido SET ativo = false WHERE id = ?")
 @Where(clause = "ativo = true")
 @Entity
 public class Pedido {
@@ -29,15 +29,13 @@ public class Pedido {
 
 	private String data = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
 
-//	@ManyToOne
-//	private Pessoa pessoa;
-		
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Produto> produto = new ArrayList<>();
-	
+
 	private Boolean ativo = true;
-	
-	public Pedido() {}
+
+	public Pedido() {
+	}
 
 	public Long getId() {
 		return id;

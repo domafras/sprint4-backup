@@ -8,24 +8,31 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Endereco {
 
-	@Id @NotNull @NotEmpty
+	@Id
+	@NotNull
+	@NotEmpty
 	private String cep;
-	
-	@NotNull @NotEmpty
+
+	@NotNull
+	@NotEmpty
 	private String pais;
-	
-	@NotNull @NotEmpty
+
+	@NotNull
+	@NotEmpty
 	private String estado;
-	
-	@NotNull @NotEmpty
+
+	@NotNull
+	@NotEmpty
 	private String cidade;
-	
-	@NotNull @NotEmpty
+
+	@NotNull
+	@NotEmpty
 	private String rua;
-	
+
 	@SuppressWarnings("unused")
-	private Endereco(){}
-	
+	private Endereco() {
+	}
+
 	public Endereco(String cep, String pais, String estado, String cidade, String rua) {
 		this.cep = cep;
 		this.pais = pais;
@@ -34,7 +41,6 @@ public class Endereco {
 		this.rua = rua;
 	}
 
-
 	public String getCep() {
 		return cep;
 	}
@@ -42,7 +48,7 @@ public class Endereco {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
+
 	public String getPais() {
 		return pais;
 	}

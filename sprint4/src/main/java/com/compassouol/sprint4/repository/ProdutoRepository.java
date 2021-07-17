@@ -5,7 +5,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.compassouol.sprint4.model.Produto;
 
-public interface ProdutoRepository extends PagingAndSortingRepository<Produto, Long>, 
-JpaSpecificationExecutor<Produto>/*, JpaRepository<Produto, Long>*/ {
+public interface ProdutoRepository extends PagingAndSortingRepository<Produto, Long>,
+		JpaSpecificationExecutor<Produto>/* , JpaRepository<Produto, Long> */ {
 
 }

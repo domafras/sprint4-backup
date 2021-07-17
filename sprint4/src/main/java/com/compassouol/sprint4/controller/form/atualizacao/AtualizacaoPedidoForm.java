@@ -19,12 +19,22 @@ public class AtualizacaoPedidoForm {
 	@NotEmpty
 	private List<Long> idProduto = new ArrayList<>();
 
+	private Boolean ativo = true;
+
 	public List<Long> getIdProduto() {
 		return idProduto;
 	}
 
 	public void setIdProduto(List<Long> idProduto) {
 		this.idProduto = idProduto;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Pedido atualizar(Long id, PedidoRepository pedidoRepository, ProdutoRepository produtoRepository) {
@@ -38,6 +48,7 @@ public class AtualizacaoPedidoForm {
 			carrinho(pedidoCadastrado, produtoRepository);
 
 			pedidoCadastrado.setData(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			pedidoCadastrado.setAtivo(ativo);
 
 			return pedidoCadastrado;
 		}

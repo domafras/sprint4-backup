@@ -7,22 +7,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+@SQLDelete(sql = "UPDATE Produto SET ativo = false WHERE id = ?")
+@Where(clause = "ativo = true")
 @Entity
 public class Produto {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String descricao;
 	private BigDecimal precoUnitario;
-	private Boolean status;
-	
-	public Produto(){}
-	
-	public Produto(String descricao, BigDecimal precoUnitario, Boolean status) {
+	private Boolean ativo;
+
+	public Produto() {
+	}
+
+	public Produto(String descricao, BigDecimal precoUnitario, Boolean ativo) {
 		this.descricao = descricao;
 		this.precoUnitario = precoUnitario;
-		this.status = true;
+		this.ativo = true;
 	}
 
 	public Long getId() {
@@ -49,12 +56,12 @@ public class Produto {
 		this.precoUnitario = precoUnitario;
 	}
 
-	public Boolean getStatus() {
-		return status;
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
-	
+
 }

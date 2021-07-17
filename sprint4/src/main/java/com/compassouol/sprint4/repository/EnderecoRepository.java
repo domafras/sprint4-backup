@@ -6,6 +6,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.compassouol.sprint4.model.Endereco;
 
 public interface EnderecoRepository extends PagingAndSortingRepository<Endereco, String>,
-		JpaSpecificationExecutor<Endereco>/*, JpaRepository<Endereco, String>*/ {
+		JpaSpecificationExecutor<Endereco>/* , JpaRepository<Endereco, String> */ {
 
 }

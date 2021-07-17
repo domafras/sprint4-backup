@@ -29,7 +29,7 @@ public class PessoaForm {
 	@NotNull
 	@NotEmpty
 	@Length(min = 11, max = 11)
-	//@CPF
+	// @CPF
 	private String cpf;
 
 	@NotNull
@@ -81,7 +81,6 @@ public class PessoaForm {
 		this.enderecos = enderecos;
 	}
 
-	// Salvar endereço
 	public Pessoa save(PessoaRepository pessoaRepository, EnderecoRepository enderecoRepository) {
 
 		for (Endereco enderecos : enderecos) {
@@ -94,7 +93,6 @@ public class PessoaForm {
 		return pessoa;
 	}
 
-	// Validação CPF único
 	public Pessoa converter(PessoaRepository pessoaRepository) {
 		Pessoa pessoa = pessoaRepository.findByCpf(this.cpf);
 		if (pessoa == null) {
