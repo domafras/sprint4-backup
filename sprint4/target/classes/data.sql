@@ -3,7 +3,7 @@ INSERT INTO USUARIO(nome, email, senha) VALUES('Auth', 'auth@email.com', '$2a$10
 
 INSERT INTO PESSOA(nome, cpf, salario, sexo) VALUES('Fulaninho de Tal', '01898745028', '1500.00', 'M')
 INSERT INTO PESSOA(nome, cpf, salario, sexo) VALUES('Beltrão', '22222222222', '2200.00', 'M')
-INSERT INTO PESSOA(nome, cpf, salario, sexo) VALUES('Casimiro', '33333333333', '3300.00', 'M')
+INSERT INTO PESSOA(nome, cpf, salario, sexo) VALUES('Casimiro', '33333333333', '3300.00', 'F')
 
 INSERT INTO ENDERECO(pais, estado, cidade, cep, rua) VALUES ('Brasil', 'Rio Grande do Sul', 'Pelotas', '96075230', 'Visconde de Abaete')
 INSERT INTO ENDERECO(pais, estado, cidade, cep, rua) VALUES ('Brasil', 'Paraná', 'Curitiba', '80250160', 'Brigadeiro Franco')
